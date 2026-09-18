@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://luisosorio.dev', // TODO: cambia por tu dominio real
+  site: 'https://luisosorio.tech',
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
