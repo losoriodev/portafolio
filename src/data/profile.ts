@@ -3,7 +3,7 @@ import type { L } from '../i18n/ui';
 // ─────────────────────────────────────────────────────────────
 // Todo el contenido del portafolio vive aquí. Edita este archivo
 // y las dos páginas (ES / EN) se actualizan solas.
-// Los campos marcados TODO son los que no salían en tu LinkedIn.
+// Los campos marcados TODO son opcionales de ampliar.
 // ─────────────────────────────────────────────────────────────
 
 export const profile = {
@@ -18,7 +18,7 @@ export const profile = {
   highlights: ['AI Agents', 'RAG', 'OpenAI / Claude', 'Next.js / TypeScript', 'Python', 'AWS'],
   email: 'luisjavierosorio3@gmail.com',
   linkedin: 'https://www.linkedin.com/in/luisosorio-76b8b213a',
-  github: 'https://github.com/TODO', // TODO: tu usuario de GitHub
+  github: 'https://github.com/losoriodev',
   website: 'https://fitcoachai.co',
   avatar: '/avatar.svg', // Reemplaza por /avatar.png (o .webp) con tu foto/ilustración
 };
@@ -124,7 +124,37 @@ export const projects: Project[] = [
     },
     tags: ['React Native', 'TypeScript', 'Supabase', 'LLMs'],
   },
-  // TODO: agrega más proyectos (agentes, herramientas internas, open source…)
+  {
+    name: 'Banking Helper — RAG Agent',
+    repo: 'https://github.com/losoriodev/blossom-ai-helper',
+    kind: { es: 'Agente de IA', en: 'AI Agent' },
+    description: {
+      es: 'Agente RAG orientado a producción para preguntas de login y seguridad bancaria: reseteo de contraseña, bloqueos, MFA y dispositivos. Orquestación con LangGraph, API en FastAPI, vectores en ChromaDB y cálculo de días hábiles con festivos.',
+      en: 'Production-minded RAG agent for banking login and security questions: password reset, lockouts, MFA and device management. LangGraph orchestration, FastAPI backend, ChromaDB vector store and holiday-aware business-day logic.',
+    },
+    tags: ['Python', 'LangGraph', 'FastAPI', 'ChromaDB', 'OpenAI', 'Docker'],
+  },
+  {
+    name: 'CreditApp',
+    repo: 'https://github.com/losoriodev/credit-app',
+    kind: { es: 'Backend', en: 'Backend' },
+    description: {
+      es: 'Sistema de solicitudes de crédito multipaís con reglas de negocio, proveedores bancarios y flujos de estado independientes por país. Elixir/Phoenix sobre la BEAM, PostgreSQL, colas con Oban y UI en tiempo real con LiveView.',
+      en: 'Multi-country credit application system with per-country business rules, banking providers and state machines. Elixir/Phoenix on the BEAM, PostgreSQL, Oban job queues and real-time UI with LiveView.',
+    },
+    tags: ['Elixir', 'Phoenix', 'LiveView', 'PostgreSQL', 'Oban'],
+  },
+  {
+    name: 'luisosorio.tech',
+    url: 'https://luisosorio.tech',
+    repo: 'https://github.com/losoriodev/portafolio',
+    kind: { es: 'Open source', en: 'Open source' },
+    description: {
+      es: 'Este portafolio: sitio estático bilingüe con estética de IDE, tema claro/oscuro y scroll-spy sin dependencias de JavaScript externas.',
+      en: 'This portfolio: a bilingual static site with an IDE aesthetic, light/dark theme and scroll-spy with no external JavaScript dependencies.',
+    },
+    tags: ['Astro', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+  },
 ];
 
 export type SkillGroup = { title: L; items: string[] };
