@@ -1,0 +1,35 @@
+---
+import Section from './Section.astro';
+import Icon from './Icon.astro';
+import { ui, t, type Lang } from '../i18n/ui';
+import { certifications, education } from '../data/profile';
+const { lang } = Astro.props as { lang: Lang };
+const s = ui[lang];
+---
+<Section id="certs" title={s.certsTitle} icon="award">
+  <h3 class="font-mono text-dim text-lg mb-4"><span class="text-accent">//</span> {s.education}</h3>
+  <ul class="flex flex-col gap-3 mb-10">
+    {education.map((e) => (
+      <li class="window p-5 flex items-center gap-4">
+        <span class="text-accent shrink-0"><Icon name="book" size={26} /></span>
+        <div>
+          <p class="font-mono font-semibold">{t(e.degree, lang)}</p>
+          <p class="text-dim text-sm">{e.school} · {e.period}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+
+  <h3 class="font-mono text-dim text-lg mb-4"><span class="text-accent">//</span> {s.certifications}</h3>
+  <ul class="grid md:grid-cols-2 gap-3">
+    {certifications.map((c) => (
+      <li class="window p-5 flex items-center gap-4">
+        <span class="text-cyan shrink-0"><Icon name="award" size={24} /></span>
+        <div>
+          <p class="font-mono font-semibold text-[.95rem]">{c.name}</p>
+          {(c.issuer || c.year) && <p class="text-dim text-sm">{[c.issuer, c.year].filter(Boolean).join(' · ')}</p>}
+        </div>
+      </li>
+    ))}
+  </ul>
+</Section>

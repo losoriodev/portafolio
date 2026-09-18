@@ -1,0 +1,39 @@
+---
+import Section from './Section.astro';
+import { ui, t, type Lang } from '../i18n/ui';
+import { about } from '../data/profile';
+const { lang } = Astro.props as { lang: Lang };
+const s = ui[lang];
+const facts = {
+  location: about.facts.location,
+  focus: about.facts.focus,
+  editor: about.facts.editor,
+  status: t(about.facts.status, lang),
+};
+---
+<Section id="about" title={s.aboutTitle} icon="user">
+  <div class="grid lg:grid-cols-[1.4fr_1fr] gap-6">
+    <article class="window">
+      <header class="flex items-center justify-between px-4 py-2 border-b border-border-2">
+        <span class="flex gap-1.5" aria-hidden="true"><i class="w-2.5 h-2.5 rounded-full bg-red/70"></i><i class="w-2.5 h-2.5 rounded-full bg-accent/70"></i><i class="w-2.5 h-2.5 rounded-full bg-green/70"></i></span>
+        <span class="font-mono text-xs text-dim">bio.md</span>
+      </header>
+      <div class="p-6 flex flex-col gap-4 text-[1.02rem] leading-relaxed text-text/90">
+        {about.paragraphs.map((p) => <p>{t(p, lang)}</p>)}
+      </div>
+    </article>
+
+    <article class="window">
+      <header class="flex items-center justify-between px-4 py-2 border-b border-border-2">
+        <span class="flex gap-1.5" aria-hidden="true"><i class="w-2.5 h-2.5 rounded-full bg-red/70"></i><i class="w-2.5 h-2.5 rounded-full bg-accent/70"></i><i class="w-2.5 h-2.5 rounded-full bg-green/70"></i></span>
+        <span class="font-mono text-xs text-dim">fun_facts.json</span>
+      </header>
+      <pre class="p-6 font-mono text-sm leading-7 whitespace-pre-wrap"><span class="text-accent">{'{'}</span>
+{Object.entries(facts).map(([k, v]) => (
+  <>  <span class="text-cyan">"{k}"</span><span class="text-dim">: </span>{Array.isArray(v)
+    ? <><span class="text-accent">[</span>{v.map((x, i) => <><span class="text-green">"{x}"</span>{i < v.length - 1 && <span class="text-dim">, </span>}</>)}<span class="text-accent">]</span></>
+    : <span class="text-green">"{v}"</span>}<span class="text-dim">,</span>{'\n'}</>
+))}<span class="text-accent">{'}'}</span></pre>
+    </article>
+  </div>
+</Section>

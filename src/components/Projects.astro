@@ -1,0 +1,26 @@
+---
+import Section from './Section.astro';
+import Icon from './Icon.astro';
+import { ui, t, type Lang } from '../i18n/ui';
+import { projects } from '../data/profile';
+const { lang } = Astro.props as { lang: Lang };
+const s = ui[lang];
+---
+<Section id="projects" title={s.projTitle} icon="folder">
+  <div class="grid md:grid-cols-2 gap-5">
+    {projects.map((p) => (
+      <article class="window flex flex-col p-6 hover:border-accent/50 transition-colors">
+        <div class="flex items-center justify-between mb-4">
+          <span class="chip text-cyan border-cyan/40 text-xs">{t(p.kind, lang)}</span>
+          <span class="flex gap-3 font-mono text-xs">
+            {p.repo && <a href={p.repo} target="_blank" rel="noopener" class="text-dim hover:text-text focus-ring inline-flex items-center gap-1"><Icon name="github" size={14} /> repo</a>}
+            {p.url && <a href={p.url} target="_blank" rel="noopener" class="text-dim hover:text-text focus-ring inline-flex items-center gap-1"><Icon name="external" size={14} /> {s.visit}</a>}
+          </span>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">{p.name}</h3>
+        <p class="text-dim leading-relaxed mb-5 flex-1">{t(p.description, lang)}</p>
+        <ul class="flex flex-wrap gap-2">{p.tags.map((tag) => <li class="chip text-dim text-xs">{tag}</li>)}</ul>
+      </article>
+    ))}
+  </div>
+</Section>

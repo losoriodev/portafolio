@@ -1,0 +1,18 @@
+---
+// Sin leyenda de colores ni "semáforo": solo grupos claros. (feedback del portafolio de referencia)
+import Section from './Section.astro';
+import { ui, t, type Lang } from '../i18n/ui';
+import { skills } from '../data/profile';
+const { lang } = Astro.props as { lang: Lang };
+const s = ui[lang];
+---
+<Section id="skills" title={s.skillsTitle} icon="zap">
+  <div class="grid md:grid-cols-2 gap-5">
+    {skills.map((g) => (
+      <article class="window p-6">
+        <h3 class="font-mono text-accent font-semibold text-lg pb-3 mb-4 border-b border-dashed border-border">{t(g.title, lang)}</h3>
+        <ul class="flex flex-wrap gap-2.5">{g.items.map((item) => <li class="chip text-[.85rem] py-1.5 px-3.5">{item}</li>)}</ul>
+      </article>
+    ))}
+  </div>
+</Section>

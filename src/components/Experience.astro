@@ -1,0 +1,26 @@
+---
+import Section from './Section.astro';
+import Icon from './Icon.astro';
+import { ui, t, type Lang } from '../i18n/ui';
+import { experience } from '../data/profile';
+const { lang } = Astro.props as { lang: Lang };
+const s = ui[lang];
+---
+<Section id="experience" title={s.expTitle} icon="briefcase">
+  <ol class="timeline flex flex-col gap-10">
+    {experience.map((job) => (
+      <li class="relative">
+        <span class="timeline-dot" aria-hidden="true"></span>
+        <p class="font-mono text-sm text-dim mb-1">{t(job.period, lang)}{job.location && <span class="text-muted"> · {job.location}</span>}</p>
+        <h3 class="text-xl font-semibold mb-3">
+          {t(job.role, lang)} <span class="text-dim font-normal">@</span>
+          {job.url
+            ? <a href={job.url} target="_blank" rel="noopener" class="text-accent hover:underline focus-ring inline-flex items-center gap-1">{job.company}<Icon name="external" size={14} /></a>
+            : <span class="text-accent">{job.company}</span>}
+        </h3>
+        <p class="text-dim leading-relaxed max-w-3xl mb-4">{t(job.description, lang)}</p>
+        <ul class="flex flex-wrap gap-2">{job.tags.map((tag) => <li class="chip text-dim text-xs">{tag}</li>)}</ul>
+      </li>
+    ))}
+  </ol>
+</Section>

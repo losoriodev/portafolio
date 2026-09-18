@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+import { ui, type Lang } from '../i18n/ui';
+import { profile } from '../data/profile';
+const { lang } = Astro.props as { lang: Lang };
+const s = ui[lang];
+---
+<section id="home" class="min-h-[calc(100vh-2.5rem-2.5rem-1.75rem)] flex items-center scroll-mt-12">
+  <div class="grid lg:grid-cols-[1.2fr_.8fr] gap-10 items-center w-full py-12">
+    <div>
+      <p class="font-mono text-sm mb-6">
+        <span class="text-green">{profile.handle}@portfolio</span><span class="text-dim">:</span><span class="text-cyan">~/home</span><span class="text-dim">$</span>
+        <span class="text-accent ml-2 cursor">{s.whoami}</span>
+      </p>
+      <p class="font-mono text-dim text-lg mb-2">{s.hello}</p>
+      <h1 class="font-pixel text-[clamp(2.6rem,7vw,5rem)] leading-none mb-3">{profile.name}</h1>
+      <p class="font-mono text-accent text-[clamp(1.1rem,2.2vw,1.5rem)] font-semibold mb-6">
+        <span class="text-dim">//</span> {profile.role[lang]}
+      </p>
+      <p class="text-dim text-lg leading-relaxed max-w-xl mb-7">{profile.tagline[lang]}</p>
+
+      <ul class="flex flex-wrap gap-2 mb-9" aria-label="Highlights">
+        {profile.highlights.map((h) => <li class="chip text-dim"><span class="text-accent">//</span> {h}</li>)}
+      </ul>
+
+      <div class="flex flex-wrap gap-3 mb-6">
+        <a href="#projects" class="link-btn primary focus-ring">✦ {s.ctaProjects}</a>
+        <a href="#about" class="link-btn focus-ring">→ {s.ctaAbout}</a>
+      </div>
+
+      <ul class="flex flex-wrap gap-2" aria-label="Social">
+        <li><a href={profile.linkedin} target="_blank" rel="noopener" class="chip focus-ring hover:border-accent transition-colors"><Icon name="linkedin" size={14} /> LinkedIn</a></li>
+        <li><a href={profile.github} target="_blank" rel="noopener" class="chip focus-ring hover:border-accent transition-colors"><Icon name="github" size={14} /> GitHub</a></li>
+        <li><a href={`mailto:${profile.email}`} class="chip focus-ring hover:border-accent transition-colors"><Icon name="mail" size={14} /> Email</a></li>
+      </ul>
+    </div>
+
+    <div class="hidden lg:flex justify-center">
+      <div class="relative">
+        <div class="absolute inset-0 rounded-full blur-3xl bg-accent/20" aria-hidden="true"></div>
+        <img src={profile.avatar} alt={`Retrato de ${profile.name}`} width="320" height="320" class="relative w-72 h-72 xl:w-80 xl:h-80 object-cover rounded-full border-2 border-border" loading="eager" />
+      </div>
+    </div>
+  </div>
+</section>

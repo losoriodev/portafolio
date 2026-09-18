@@ -1,0 +1,27 @@
+---
+import Section from './Section.astro';
+import Icon from './Icon.astro';
+import { ui, type Lang } from '../i18n/ui';
+import { profile } from '../data/profile';
+const { lang } = Astro.props as { lang: Lang };
+const s = ui[lang];
+---
+<Section id="contact" title={s.contactTitle} icon="mail">
+  <div class="window max-w-2xl">
+    <header class="flex items-center justify-between px-4 py-2 border-b border-border-2">
+      <span class="flex gap-1.5" aria-hidden="true"><i class="w-2.5 h-2.5 rounded-full bg-red/70"></i><i class="w-2.5 h-2.5 rounded-full bg-accent/70"></i><i class="w-2.5 h-2.5 rounded-full bg-green/70"></i></span>
+      <span class="font-mono text-xs text-dim">contact.sh</span>
+    </header>
+    <div class="p-6 font-mono text-sm leading-8">
+      <p><span class="text-green">$</span> <span class="text-dim">echo</span> "{s.contactLead}"</p>
+      <p><span class="text-green">$</span> <span class="text-dim">cat</span> contact.txt</p>
+      <ul class="pl-4 mt-2 flex flex-col gap-1">
+        <li><a href={`mailto:${profile.email}`} class="focus-ring inline-flex items-center gap-2 text-accent hover:underline"><Icon name="mail" size={15} /> {profile.email}</a></li>
+        <li><a href={profile.linkedin} target="_blank" rel="noopener" class="focus-ring inline-flex items-center gap-2 text-cyan hover:underline"><Icon name="linkedin" size={15} /> linkedin.com/in/luisosorio</a></li>
+        <li><a href={profile.github} target="_blank" rel="noopener" class="focus-ring inline-flex items-center gap-2 text-purple hover:underline"><Icon name="github" size={15} /> github.com</a></li>
+        <li><a href={profile.website} target="_blank" rel="noopener" class="focus-ring inline-flex items-center gap-2 text-green hover:underline"><Icon name="globe" size={15} /> fitcoachai.co</a></li>
+      </ul>
+      <p class="mt-4"><span class="text-green">$</span> <span class="cursor"></span></p>
+    </div>
+  </div>
+</Section>
